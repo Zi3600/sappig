@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAPPIG. Hasselt — Vegan smoothies, sapjes en plantaardige hapjes</title>
+  <meta name="description" content="SAPPIG. is de 100% plantaardige juicebar in hartje Hasselt. Verse smoothies, sapjes, shakes en vegan lunch. Isabellastraat 68 — wo-vr 12u-18u, za 11u-18u." />
+  <meta property="og:title" content="SAPPIG. Hasselt — Vegan smoothies, sapjes en plantaardige hapjes" />
+  <meta property="og:description" content="100% plantaardige juicebar in hartje Hasselt. Verse smoothies, sapjes, shakes en vegan lunch." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/smoothies-lemons.jpg" />
+  <link rel="icon" type="image/png" href="images/sappig-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "SAPPIG.",
+    "image": "images/smoothies-lemons.jpg",
+    "logo": "images/sappig-logo.png",
+    "servesCuisine": "Vegan",
+    "priceRange": "€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Isabellastraat 68",
+      "postalCode": "3500",
+      "addressLocality": "Hasselt",
+      "addressCountry": "BE"
+    },
+    "sameAs": [
+      "https://www.instagram.com/sappig.juicebar/",
+      "https://www.facebook.com/sappig.juicetruck/"
+    ],
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday", "Friday"], "opens": "12:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:00", "closes": "18:00" }
+    ]
+  }
+  </script>
+</head>
+<body class="has-hero" data-page="home">
+
+  <!-- floral cluster, reused in hero + fullscreen menu -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="floral-cluster">
+        <g transform="translate(60 62)">
+          <g fill="#E989B4">
+            <ellipse rx="13" ry="26" cy="-24" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(60)" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(120)" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(180)" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(240)" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(300)" />
+          </g>
+          <circle r="13" fill="#F2C14E" />
+        </g>
+        <g transform="translate(146 116) scale(.72)">
+          <g fill="#EE8A4F">
+            <ellipse rx="13" ry="26" cy="-24" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(72)" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(144)" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(216)" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(288)" />
+          </g>
+          <circle r="12" fill="#A62B5D" />
+        </g>
+        <g transform="translate(52 158) scale(.58)">
+          <g fill="#AC7FC9">
+            <ellipse rx="13" ry="26" cy="-24" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(72)" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(144)" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(216)" />
+            <ellipse rx="13" ry="26" cy="-24" transform="rotate(288)" />
+          </g>
+          <circle r="12" fill="#FAF5EC" />
+        </g>
+        <ellipse cx="118" cy="52" rx="9" ry="22" fill="#9DBE93" transform="rotate(40 118 52)" />
+        <ellipse cx="112" cy="170" rx="9" ry="22" fill="#9DBE93" transform="rotate(-35 112 170)" />
+        <ellipse cx="170" cy="62" rx="8" ry="18" fill="#59A649" transform="rotate(75 170 62)" />
+        <circle cx="160" cy="176" r="6" fill="#F2C14E" />
+        <circle cx="16" cy="108" r="5" fill="#EE8A4F" />
+      </g>
+    </defs>
+  </svg>
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <img src="images/sappig-logo.png" alt="SAPPIG." class="brand__logo" />
+    </a>
+    <button class="nav__toggle" data-i18n-aria="nav.open" aria-label="Menu openen"
+            aria-controls="fsmenu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ===================== FULLSCREEN MENU ===================== -->
+  <div class="fsmenu" id="fsmenu" aria-hidden="true">
+    <svg class="flor flor--tl" viewBox="0 0 200 200" aria-hidden="true"><use href="#floral-cluster" /></svg>
+    <svg class="flor flor--br" viewBox="0 0 200 200" aria-hidden="true"><use href="#floral-cluster" /></svg>
+    <nav class="fsmenu__links">
+      <a href="index.html" class="active" data-i18n="fs.home">Home</a>
+      <a href="menu.html" data-i18n="fs.menu">Menu</a>
+      <a href="index.html#visit" data-i18n="fs.findus">Vind ons</a>
+      <a href="https://www.instagram.com/sappig.juicebar/" target="_blank" rel="noopener">Instagram ↗</a>
+    </nav>
+    <div class="fsmenu__lang" role="group" data-i18n-aria="nav.language" aria-label="Taal">
+      <button type="button" class="lang__btn" data-lang-option="nl" aria-pressed="true">NL</button>
+      <button type="button" class="lang__btn" data-lang-option="en" aria-pressed="false">EN</button>
+      <button type="button" class="lang__btn" data-lang-option="fr" aria-pressed="false">FR</button>
+    </div>
+    <p class="fsmenu__foot"><a href="legal.html" data-i18n="fs.legal">Juridische info</a></p>
+  </div>
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <svg class="flor flor--tl" viewBox="0 0 200 200" aria-hidden="true"><use href="#floral-cluster" /></svg>
+    <svg class="flor flor--br" viewBox="0 0 200 200" aria-hidden="true"><use href="#floral-cluster" /></svg>
+    <p class="eyebrow hero__eyebrow" data-i18n="hero.eyebrow">100% plantaardig · Hasselt</p>
+    <h1><img src="images/sappig-logo.png" alt="SAPPIG." class="hero__logo" /></h1>
+    <p class="hero__sub" data-i18n="hero.sub">Smoothies, sapjes en plantaardige hapjes.</p>
+    <div class="hero__cta">
+      <a href="menu.html" class="btn" data-i18n="hero.cta1">Bekijk ons menu</a>
+      <a href="https://www.instagram.com/sappig.juicebar/" target="_blank" rel="noopener" class="btn btn--ghost" data-i18n="hero.cta2">Bekijk onze Instagram</a>
+    </div>
+  </header>
+
+  <!-- ===================== INSTAGRAM STRIP ===================== -->
+  <section class="section bg-paper">
+    <div class="wrap center">
+      <p class="eyebrow reveal" data-i18n="ig.eyebrow">Uit onze feed</p>
+      <h2 class="reveal" data-delay="1" data-i18n="ig.h2">Een kijkje binnen</h2>
+      <div class="divider reveal" data-delay="1"></div>
+    </div>
+    <div class="wrap igrow reveal" data-delay="2" data-strip>
+      <button class="ig-nav ig-nav--prev" data-strip-prev data-i18n-aria="ig.prev" aria-label="Vorige foto">‹</button>
+      <div class="ig-strip">
+        <figure class="ig-card"><img src="images/smoothies-lemons.jpg" alt="Drie kleurrijke smoothies voor de bloemenmuur bij SAPPIG." loading="lazy" /></figure>
+        <figure class="ig-card"><img src="images/neon-juice-latte.jpg" alt="Vers sapje en iced latte onder het neonbord 'Gij zijt een SAPPIG ding'." loading="lazy" /></figure>
+        <figure class="ig-card"><img src="images/smoothies-flower-wall.jpg" alt="Twee smoothies in ananasglazen voor de bloemenmuur." loading="lazy" /></figure>
+        <figure class="ig-card"><img src="images/smoothie-banana-bread.jpg" alt="Rode smoothie met een stuk vegan bananenbrood." loading="lazy" /></figure>
+        <figure class="ig-card"><img src="images/lounge-flower-wall.jpg" alt="Het zithoekje met bloemenmuur bij SAPPIG in Hasselt." loading="lazy" /></figure>
+        <figure class="ig-card ig-card--wide"><img src="images/interior-panorama.jpg" alt="Panorama van het interieur van SAPPIG met de bloemenbar." loading="lazy" /></figure>
+      </div>
+      <button class="ig-nav ig-nav--next" data-strip-next data-i18n-aria="ig.next" aria-label="Volgende foto">›</button>
+    </div>
+    <div class="wrap center">
+      <a href="https://www.instagram.com/sappig.juicebar/" target="_blank" rel="noopener" class="btn reveal" data-delay="2" data-i18n="ig.cta">Volg @sappig.juicebar</a>
+    </div>
+  </section>
+
+  <!-- ===================== REVIEWS ===================== -->
+  <section class="section">
+    <div class="wrap center">
+      <p class="eyebrow reveal" data-i18n="rev.eyebrow">Reviews</p>
+      <h2 class="reveal" data-delay="1" data-i18n="rev.h2">Zie wat onze klanten te zeggen hebben</h2>
+      <div class="divider reveal" data-delay="1"></div>
+
+      <div class="reviews reveal" data-delay="2" data-carousel data-i18n-aria="rev.label" aria-label="Klantenreviews">
+        <figure class="review active" data-slide>
+          <div class="review__stars" aria-label="5 van 5 sterren">★★★★★</div>
+          <blockquote class="review__txt">“Tried the coffee, the smoothies and the melted ‘cheese’ … All ethical, tasty and with a personal twist? Yes, please! Now just waiting for this to come on the speakers … #Juicy”</blockquote>
+          <figcaption class="review__by">Bert Verbeemen</figcaption>
+        </figure>
+        <figure class="review" data-slide>
+          <div class="review__stars">★★★★★</div>
+          <blockquote class="review__txt">“Wow, what a great place for a vegan cake and coffee!”</blockquote>
+          <figcaption class="review__by">Tamás Rácz</figcaption>
+        </figure>
+        <figure class="review" data-slide>
+          <div class="review__stars">★★★★★</div>
+          <blockquote class="review__txt">“The best matcha latte 🍵”</blockquote>
+          <figcaption class="review__by">Khrystyna N</figcaption>
+        </figure>
+        <figure class="review" data-slide>
+          <div class="review__stars">★★★★★</div>
+          <blockquote class="review__txt">“Great place, excellent service. If you are here, I advise you to try the muffins — they are incomparable.”</blockquote>
+          <figcaption class="review__by">Sirvard Gevorgyan</figcaption>
+        </figure>
+        <figure class="review" data-slide>
+          <div class="review__stars">★★★★★</div>
+          <blockquote class="review__txt">“For breakfast at my best friend’s wedding, we could count on Sappig. We had visited the cozy shop in Hasselt in advance to decide which sandwiches we wanted for the wedding. At the agreed time, the order was ready, and we even received a little extra. Everyone at the breakfast found the sandwiches delicious; no one noticed that they were vegan. They were prepared with care, just as they are done in the shop itself. The bride, groom, bridesmaid, and family were very satisfied.”</blockquote>
+          <figcaption class="review__by">Inge Geuskens</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURED ===================== -->
+  <section class="section bg-cream2">
+    <div class="wrap">
+      <div class="split">
+        <div class="reveal">
+          <div class="feature-frame" data-carousel aria-label="Uitgelicht">
+            <div class="feature-tag" data-i18n="feat.tag">Favoriet</div>
+            <div class="feature-slide active" data-slide>
+              <img src="images/smoothies-lemons.jpg" alt="Drie smoothies in verschillende kleuren" loading="lazy" />
+              <div class="feature-cap"><span class="nm" data-i18n="cap.smoothies">Smoothies · 100% fruit</span><span class="pr">€ 7,00+</span></div>
+            </div>
+            <div class="feature-slide" data-slide>
+              <img src="images/smoothies-flower-wall.jpg" alt="Twee verse sapjes in ananasglazen" loading="lazy" />
+              <div class="feature-cap"><span class="nm" data-i18n="cap.sapjes">Sapjes · fruit &amp; groenten</span><span class="pr">€ 7,00+</span></div>
+            </div>
+            <div class="feature-slide" data-slide>
+              <img src="images/smoothie-banana-bread.jpg" alt="Smoothie met vegan bananenbrood" loading="lazy" />
+              <div class="feature-cap"><span class="nm" data-i18n="cap.hapjes">Plantaardige hapjes</span><span class="pr">€ 8,50+</span></div>
+            </div>
+            <div class="feature-dots">
+              <i class="on" data-dot></i><i data-dot></i><i data-dot></i>
+            </div>
+          </div>
+        </div>
+        <div class="split__body reveal" data-delay="1">
+          <p class="split__num" data-i18n="feat.num">Van achter de bar</p>
+          <h2 data-i18n="feat.h2">Vers geperst, vers gemixt</h2>
+          <div class="divider divider--left"></div>
+          <p data-i18n="feat.p1">Smoothies van 100% fruit, sapjes van fruit en groenten, en een lunch die volledig plantaardig is. Elke keer ter plekke gemaakt.</p>
+          <a href="menu.html" class="btn" data-i18n="feat.cta">Bekijk het volledige menu</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOURS ===================== -->
+  <section class="section hours-band">
+    <img class="hours-band__bg" src="images/lounge-flower-wall.jpg" alt="" aria-hidden="true" loading="lazy" />
+    <div class="wrap">
+      <div class="hours-band__grid">
+        <div class="hours-card reveal">
+          <p class="split__num" data-i18n="hrs.num">Openingsuren</p>
+          <h2 data-i18n="hrs.h2">Kom eens langs</h2>
+          <div class="divider divider--left"></div>
+          <div class="hours">
+            <div class="hours__row">
+              <span class="hours__day" data-i18n="hrs.weekdays">wo – vr</span>
+              <span class="hours__dots"></span>
+              <span class="hours__time">12:00 – 18:00</span>
+            </div>
+            <div class="hours__row">
+              <span class="hours__day" data-i18n="hrs.saturday">zaterdag</span>
+              <span class="hours__dots"></span>
+              <span class="hours__time">11:00 – 18:00</span>
+            </div>
+            <div class="hours__row">
+              <span class="hours__day">
+                <span class="chip chip--sun" data-i18n="hrs.koop">Koopzondag</span>
+                <small class="hours__sub" data-i18n="hrs.koopSub">1e zondag van de maand</small>
+              </span>
+              <span class="hours__dots"></span>
+              <span class="hours__time">12:00 – 17:00</span>
+            </div>
+            <div class="hours__row">
+              <span class="hours__day">
+                <span class="chip chip--rose" data-i18n="hrs.after">Afterwork</span>
+                <small class="hours__sub" data-i18n="hrs.afterSub">2e vrijdag van de maand</small>
+              </span>
+              <span class="hours__dots"></span>
+              <span class="hours__time">18:00 – 21:00</span>
+            </div>
+          </div>
+          <p class="hours__closed" data-i18n="hrs.closed">Gesloten op zondag (behalve koopzondag), maandag en dinsdag.</p>
+          <a href="#visit" class="btn" data-i18n="hrs.cta">Plan je bezoek</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANORAMA ===================== -->
+  <section class="pano">
+    <img src="images/interior-panorama.jpg" alt="Het volledige interieur van SAPPIG met bloemenbar en zitplaatsen" loading="lazy" />
+  </section>
+
+  <!-- ===================== VISIT / LOCATION ===================== -->
+  <section class="section--tight" id="visit" style="padding-bottom:0;">
+    <div class="locate">
+      <div class="locate__info">
+        <p class="eyebrow" data-i18n="visit.eyebrow">Bezoek ons</p>
+        <h2 data-i18n="visit.h2">Vind ons in hartje Hasselt</h2>
+        <div class="locate__row">
+          <span class="ic">◎</span>
+          <span><strong>SAPPIG.</strong>Isabellastraat 68, 3500 Hasselt, België</span>
+        </div>
+        <div class="locate__row">
+          <span class="ic">◷</span>
+          <span><strong data-i18n="visit.hoursLabel">Openingsuren</strong>
+            <span data-i18n-html="visit.hoursSummary">wo – vr · 12:00 – 18:00<br>za · 11:00 – 18:00<br>Koopzondag (1e van de maand) · 12:00 – 17:00<br>Afterwork (2e vrijdag) · 18:00 – 21:00</span>
+          </span>
+        </div>
+        <div class="locate__row">
+          <span class="ic">◈</span>
+          <span><strong data-i18n="visit.followLabel">Volg ons</strong>@sappig.juicebar</span>
+        </div>
+        <div class="locate__socials">
+          <a href="https://www.instagram.com/sappig.juicebar/" target="_blank" rel="noopener">◈ Instagram</a>
+          <a href="https://maps.google.com/?q=SAPPIG,+Isabellastraat+68,+3500+Hasselt" target="_blank" rel="noopener" data-i18n="visit.directions">◹ Routebeschrijving</a>
+        </div>
+      </div>
+      <div class="locate__map">
+        <iframe
+          title="Kaart naar SAPPIG, Isabellastraat 68, 3500 Hasselt"
+          src="https://www.google.com/maps?q=SAPPIG%2C%20Isabellastraat%2068%2C%203500%20Hasselt&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="images/sappig-logo.png" alt="SAPPIG." loading="lazy" />
+          <p data-i18n="footer.tag">Smoothies, sapjes en plantaardige hapjes in hartje Hasselt.</p>
+        </div>
+        <div class="footer__col">
+          <h4 data-i18n="footer.explore">Ontdek</h4>
+          <a href="index.html" data-i18n="fs.home">Home</a>
+          <a href="menu.html" data-i18n="fs.menu">Menu</a>
+          <a href="index.html#visit" data-i18n="fs.findus">Vind ons</a>
+          <a href="legal.html" data-i18n="fs.legal">Juridische info</a>
+        </div>
+        <div class="footer__col">
+          <h4 data-i18n="footer.visit">Bezoek</h4>
+          <p>Isabellastraat 68</p>
+          <p>3500 Hasselt</p>
+          <a href="https://www.instagram.com/sappig.juicebar/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span data-i18n-html="footer.rights">© <span id="year">2026</span> SAPPIG. Alle rechten voorbehouden.</span>
+        <span class="footer__credit">Site tailored and designed by students</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+  <script src="sanity.js"></script>
+</body>
+</html>

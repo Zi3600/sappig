@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.sanity/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+!.env.example
+
+# agent tooling, not part of the site
+.agents/
+.claude/skills/
+skills-lock.json
