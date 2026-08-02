@@ -7,5 +7,5 @@ export default defineCliConfig({
   },
   /* The site is plain HTML served from GitHub Pages, so there is no
      framework build to hook into here. */
-  autoUpdates: true,
+  deployment: {autoUpdates: true},
 })

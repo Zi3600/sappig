@@ -1,5 +1,5 @@
 import {defineType, defineField, defineArrayMember} from 'sanity'
-import {BellIcon} from '@sanity/icons'
+import {BellIcon} from '@sanity/icons/Bell'
 import {nlValue} from '../objects/menu-item'
 
 export const popup = defineType({

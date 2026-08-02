@@ -45,17 +45,6 @@
     'rev.h2':      { en: 'See what our customers have got to say', fr: 'Découvrez ce que nos clients en disent' },
     'rev.label':   { en: 'Customer reviews', fr: 'Avis clients' },
 
-    /* ---- featured ---- */
-    'feat.tag':  { en: 'Featured', fr: 'Favori' },
-    'feat.num':  { en: 'From the bar', fr: 'Au comptoir' },
-    'feat.h2':   { en: 'Fresh pressed, fresh blended', fr: 'Pressé frais, mixé frais' },
-    'feat.p1':   { en: 'Smoothies of 100% fruit, juices of fruit and veg, and a lunch that is fully plant-based. Made on the spot, every time.',
-                   fr: 'Des smoothies 100 % fruits, des jus de fruits et légumes, et un lunch entièrement végétal. Préparé sur place, à chaque fois.' },
-    'feat.cta':  { en: 'View the full menu', fr: 'Voir la carte complète' },
-    'cap.smoothies': { en: 'Smoothies · 100% fruit', fr: 'Smoothies · 100 % fruits' },
-    'cap.sapjes':    { en: 'Juices · fruit & veg', fr: 'Jus · fruits & légumes' },
-    'cap.hapjes':    { en: 'Plant-based bites', fr: 'Bouchées végétales' },
-
     /* ---- hours ---- */
     'hrs.num':      { en: 'Opening hours', fr: 'Horaires' },
     'hrs.h2':       { en: 'Come say hi', fr: 'Passez nous voir' },

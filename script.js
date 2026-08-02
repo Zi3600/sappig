@@ -134,6 +134,11 @@
     };
     strip.addEventListener('scroll', syncArrows, { passive: true });
     window.addEventListener('resize', syncArrows, { passive: true });
+    /* the photo strip is re-rendered when Sanity photos land */
+    strip.addEventListener('sappig:stripchanged', () => {
+      strip.scrollLeft = 0;
+      syncArrows();
+    });
     syncArrows();
 
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;

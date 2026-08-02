@@ -17,6 +17,26 @@ voor het menu en de pop-upberichten.
 └── studio-sappig/    Sanity Studio (aparte app, wordt niet meegepubliceerd)
 ```
 
+## Eenmalige setup (één keer, door de ontwikkelaar)
+
+```bash
+cd studio-sappig
+npm install
+npx sanity login                                  # 1. inloggen
+npx sanity cors add https://zi3600.github.io      # 2. site mag content ophalen
+npx sanity cors add http://localhost:4173         # 2b. idem voor lokaal testen
+npx sanity schema deploy                          # 3. schema naar Sanity
+npx sanity dataset import seed.ndjson production  # 4. huidig menu inladen
+npx sanity deploy                                 # 5. Studio online zetten
+```
+
+Stap 2 is de belangrijkste: zonder CORS toont de live site het vaste menu uit
+`menu.html` in plaats van wat er in Sanity staat.
+
+Stap 4 vult Sanity met het menu zoals het nu op de site staat — 8 categorieën,
+37 items, met Engelse en Franse vertalingen. De klant begint dus niet met een
+lege kaart. Het bestand komt uit `scripts/build-seed.mjs`.
+
 ## Het menu aanpassen
 
 Alles gebeurt in de Studio — er hoeft niets aan de code te veranderen.
@@ -32,6 +52,12 @@ Open http://localhost:3333.
   sleep je items om de volgorde te wijzigen, `Add item` voegt toe, het
   prullenbakje verwijdert. Een item kan ook op *Uitverkocht* (blijft zichtbaar,
   doorstreept) of *Verborgen* (tijdelijk van de kaart).
+  Een **nieuwe sectie** maken — bv. een seizoenskaart of een specialekaart —
+  doe je met de knop *Create* bovenaan: kies een titel, een emoji, en een
+  volgorde-nummer dat bepaalt waar de sectie op de kaart komt.
+- **Foto's homepagina** — de fotostrip, de brede foto en de achtergrondfoto bij
+  de openingsuren. Sleep om te herschikken. Met het bolletje op de foto bepaal
+  je welk deel zichtbaar blijft als de foto bijgesneden wordt.
 - **Pop-upberichten** — belangrijke mededelingen. Zet op *Live* om te tonen.
 - **Site-instellingen** — de notitie onderaan het menu en de taalmelding.
 
@@ -39,9 +65,15 @@ Wijzigingen zijn zichtbaar op de site zodra je op **Publish** klikt.
 
 ### Talen
 
-Nederlands is de basis. Engels en Frans zijn per veld optioneel: laat je ze
-leeg, dan toont de site het Nederlands. Daarom staat op de menupagina de
-melding dat het menu standaard in het Nederlands wordt bijgewerkt.
+Nederlands en Engels staan altijd naast elkaar in beeld — vul ze allebei in.
+Frans voeg je per veld toe met het `+`-knopje als je het wil. Alles wat leeg
+blijft, valt op de site terug op het Nederlands. Daarom staat op de menupagina
+de melding dat het menu standaard in het Nederlands wordt bijgewerkt.
+
+### Emoji
+
+Bij een categorie klik je een emoji uit het rijtje, of je typt er zelf een in
+(Windows: `Win` + `.`).
 
 ## Studio online zetten
 
@@ -60,7 +92,7 @@ in Sanity toegelaten zijn:
 ```bash
 cd studio-sappig
 npx sanity cors add https://zi3600.github.io
-npx sanity cors add http://localhost:4173
+
 ```
 
 Zonder dit valt de site terug op het menu dat vast in `menu.html` staat — de

@@ -1,6 +1,7 @@
 import {defineType, defineField, defineArrayMember} from 'sanity'
-import {UlistIcon} from '@sanity/icons'
+import {UlistIcon} from '@sanity/icons/Ulist'
 import {nlValue} from '../objects/menu-item'
+import {EmojiInput} from '../../components/EmojiInput'
 
 export const menuCategory = defineType({
   name: 'menuCategory',
@@ -26,8 +27,9 @@ export const menuCategory = defineType({
       name: 'emoji',
       title: 'Emoji',
       type: 'string',
-      description: 'Eén emoji rechts van de titel, bv. 🥤.',
-      validation: (rule) => rule.max(4),
+      description: 'Verschijnt rechts van de titel.',
+      components: {input: EmojiInput},
+      validation: (rule) => rule.max(8),
     }),
     defineField({
       name: 'note',

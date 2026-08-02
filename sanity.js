@@ -1,7 +1,7 @@
 /* SAPPIG. — Sanity content layer
    sample by _ziyad._ @ code-caffeine
 
-   The site is static HTML on GitHub Pages, so there is no server to render
+   The site is static HTML on Pages, so there is no server to render
    against. This fetches published content straight from Sanity's CDN and
    swaps it in. Everything degrades: if the request fails, is empty, or JS is
    off, the hand-written HTML that ships in the page stays exactly as it is.
@@ -33,6 +33,11 @@
       trigger, delaySeconds, frequency, showOn,
       "imageUrl": image.asset->url
     },
+    "home": *[_id == "homePage"][0]{
+      "gallery": gallery[]{ "url": asset->url, alt, hotspot },
+      "panorama": panorama{ "url": asset->url, alt, hotspot },
+      "hoursImage": hoursImage{ "url": asset->url, hotspot }
+    },
     "settings": *[_id == "siteSettings"][0]{ menuNote, languageNotice, instagramUrl }
   }`;
 
@@ -54,6 +59,18 @@
     if (className) node.className = className;
     if (text != null) node.textContent = text;   // textContent, never innerHTML
     return node;
+  }
+
+  /* Sanity's CDN does the resizing. `crop=focalpoint` honours the hotspot the
+     owner drags in the Studio, so faces and glasses survive the crop. */
+  function imageUrl(img, width, height) {
+    if (!img || !img.url) return '';
+    let url = `${img.url}?w=${width}&auto=format&q=80`;
+    if (height) url += `&h=${height}&fit=crop`;
+    if (height && img.hotspot) {
+      url += `&crop=focalpoint&fp-x=${img.hotspot.x.toFixed(3)}&fp-y=${img.hotspot.y.toFixed(3)}`;
+    }
+    return url;
   }
 
   function fetchContent() {
@@ -147,6 +164,46 @@
     root.removeAttribute('data-menu-fallback');
     if (window.SappigUI && window.SappigUI.observeReveals) {
       window.SappigUI.observeReveals(root);
+    }
+  }
+
+  /* ---------------- homepage photos ---------------- */
+
+  function renderHome(home) {
+    if (!home) return;
+
+    /* photo strip — only swapped when the owner has actually uploaded some,
+       otherwise the shipped photos stay */
+    const strip = document.querySelector('.ig-strip');
+    if (strip && home.gallery && home.gallery.length) {
+      const frag = document.createDocumentFragment();
+      home.gallery.forEach((img, i) => {
+        if (!img || !img.url) return;
+        const wide = i > 0 && i === home.gallery.length - 1;   // last one runs wide
+        const fig = el('figure', wide ? 'ig-card ig-card--wide' : 'ig-card');
+        const photo = el('img');
+        photo.src = wide ? imageUrl(img, 1120, 700) : imageUrl(img, 680, 850);
+        photo.alt = img.alt || '';
+        photo.loading = 'lazy';
+        fig.appendChild(photo);
+        frag.appendChild(fig);
+      });
+      if (frag.childNodes.length) {
+        strip.textContent = '';
+        strip.appendChild(frag);
+        strip.dispatchEvent(new CustomEvent('sappig:stripchanged', { bubbles: true }));
+      }
+    }
+
+    const pano = document.querySelector('.pano img');
+    if (pano && home.panorama && home.panorama.url) {
+      pano.src = imageUrl(home.panorama, 1920, 760);
+      if (home.panorama.alt) pano.alt = home.panorama.alt;
+    }
+
+    const hoursBg = document.querySelector('.hours-band__bg');
+    if (hoursBg && home.hoursImage && home.hoursImage.url) {
+      hoursBg.src = imageUrl(home.hoursImage, 1920, 1000);
     }
   }
 
@@ -311,6 +368,7 @@
       if (!result) return;
       cache = result;
       renderMenu(result.categories);
+      renderHome(result.home);
       renderSettings(result.settings);
       schedulePopup(result.popups);
     })

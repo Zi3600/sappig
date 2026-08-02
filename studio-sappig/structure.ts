@@ -1,7 +1,12 @@
 import type {StructureResolver} from 'sanity/structure'
-import {CogIcon, UlistIcon, BellIcon} from '@sanity/icons'
+/* @sanity/icons v5 ships one module per icon; the barrel no longer re-exports them */
+import {UlistIcon} from '@sanity/icons/Ulist'
+import {ImagesIcon} from '@sanity/icons/Images'
+import {BellIcon} from '@sanity/icons/Bell'
+import {CogIcon} from '@sanity/icons/Cog'
 
-/* siteSettings is a singleton: one fixed document, no list, no "create new". */
+/* homePage and siteSettings are singletons: one fixed document each, so they
+   open straight into the editor instead of a list with a "create new" button. */
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('SAPPIG.')
@@ -14,6 +19,10 @@ export const structure: StructureResolver = (S) =>
             .title('Menucategorieën')
             .defaultOrdering([{field: 'order', direction: 'asc'}]),
         ),
+      S.listItem()
+        .title("Foto's homepagina")
+        .icon(ImagesIcon)
+        .child(S.document().schemaType('homePage').documentId('homePage')),
       S.listItem()
         .title('Pop-upberichten')
         .icon(BellIcon)
