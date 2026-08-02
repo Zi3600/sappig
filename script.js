@@ -108,16 +108,73 @@
     start();
   });
 
-  /* --- Instagram strip: arrows, mouse wheel, drag --- */
+  /* --- Photo strip: endless loop, arrows, mouse wheel, drag --- */
   document.querySelectorAll('[data-strip]').forEach((wrapper) => {
     const strip = wrapper.querySelector('.ig-strip');
     if (!strip) return;
 
+    const looping = strip.hasAttribute('data-loop');
+    let originals = [];
+    let setWidth = 0;
+
+    const gapPx = () => {
+      const cs = getComputedStyle(strip);
+      return parseFloat(cs.columnGap || cs.gap) || 16;
+    };
     const step = () => {
       const card = strip.querySelector('.ig-card');
-      return card ? card.getBoundingClientRect().width + 16 : 320;
+      return card ? card.getBoundingClientRect().width + gapPx() : 320;
     };
     const maxScroll = () => strip.scrollWidth - strip.clientWidth;
+
+    /* Jump without animating or fighting scroll-snap — this is the seam that
+       has to stay invisible. */
+    function jumpTo(x) {
+      const snap = strip.style.scrollSnapType;
+      strip.style.scrollSnapType = 'none';
+      strip.style.scrollBehavior = 'auto';
+      strip.scrollLeft = x;
+      void strip.offsetWidth;                      // flush before restoring
+      strip.style.scrollBehavior = '';
+      strip.style.scrollSnapType = snap;
+    }
+
+    function measure() {
+      const gap = gapPx();
+      setWidth = originals.reduce((w, n) => w + n.getBoundingClientRect().width + gap, 0);
+    }
+
+    /* Clone one full set either side and park in the middle, so there is
+       always material to scroll into in both directions. */
+    function buildLoop() {
+      if (!looping) return;
+      strip.querySelectorAll('[data-clone]').forEach((n) => n.remove());
+      originals = Array.from(strip.children);
+      if (originals.length < 2) { setWidth = 0; return; }
+
+      const clone = (node) => {
+        const c = node.cloneNode(true);
+        c.setAttribute('data-clone', '');
+        c.setAttribute('aria-hidden', 'true');
+        return c;
+      };
+      originals.forEach((n) => strip.appendChild(clone(n)));
+      originals.slice().reverse().forEach((n) => strip.insertBefore(clone(n), strip.firstChild));
+
+      measure();
+      jumpTo(setWidth);
+    }
+
+    let wrapping = false;
+    function wrapIfNeeded() {
+      if (!looping || wrapping || setWidth <= 0) return;
+      const x = strip.scrollLeft;
+      if (x < setWidth * 0.5 || x > setWidth * 1.5) {
+        wrapping = true;
+        jumpTo(x < setWidth * 0.5 ? x + setWidth : x - setWidth);
+        wrapping = false;
+      }
+    }
 
     wrapper.querySelectorAll('[data-strip-prev]').forEach((b) =>
       b.addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }))
@@ -126,35 +183,59 @@
       b.addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }))
     );
 
-    /* grey out arrows at the ends */
+    /* Only a finite strip has ends worth greying out. */
     const syncArrows = () => {
+      if (looping && setWidth > 0) return;
       const max = maxScroll();
       wrapper.querySelectorAll('[data-strip-prev]').forEach((b) => b.toggleAttribute('disabled', strip.scrollLeft <= 1));
       wrapper.querySelectorAll('[data-strip-next]').forEach((b) => b.toggleAttribute('disabled', strip.scrollLeft >= max - 1));
     };
-    strip.addEventListener('scroll', syncArrows, { passive: true });
-    window.addEventListener('resize', syncArrows, { passive: true });
-    /* the photo strip is re-rendered when Sanity photos land */
+
+    strip.addEventListener('scroll', () => { wrapIfNeeded(); syncArrows(); }, { passive: true });
+    window.addEventListener('resize', () => { measure(); syncArrows(); }, { passive: true });
+    /* Sanity photos landed — rebuild the clones around the new set */
     strip.addEventListener('sappig:stripchanged', () => {
-      strip.scrollLeft = 0;
+      buildLoop();
       syncArrows();
     });
+
+    buildLoop();
     syncArrows();
 
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (!finePointer) return;
 
-    /* Mouse wheel -> horizontal. Hands scrolling back to the page once the
-       strip hits an end, so the page never feels stuck. */
+    /* Mouse wheel -> horizontal.
+       A looping strip has no ends, so it would happily swallow the page scroll
+       forever. Instead we let one uninterrupted gesture pan about a full set,
+       then hand the wheel back to the page until the user pauses or reverses. */
+    let runDist = 0;
+    let runDir = 0;
+    let runTimer = null;
+
     strip.addEventListener('wheel', (e) => {
-      if (e.ctrlKey) return;                       // pinch zoom
+      if (e.ctrlKey) return;                                // pinch zoom
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;  // trackpad swipe: native
-      const max = maxScroll();
-      if (max <= 1) return;
       const delta = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
-      if ((delta < 0 && strip.scrollLeft <= 0) || (delta > 0 && strip.scrollLeft >= max - 1)) return;
+      if (!delta) return;
+
+      const dir = delta > 0 ? 1 : -1;
+      if (dir !== runDir) { runDir = dir; runDist = 0; }
+      clearTimeout(runTimer);
+      runTimer = setTimeout(() => { runDist = 0; runDir = 0; }, 400);
+
+      if (looping && setWidth > 0) {
+        if (runDist > setWidth) return;                     // budget spent: page scrolls
+        runDist += Math.abs(delta);
+      } else {
+        const max = maxScroll();
+        if (max <= 1) return;
+        if ((delta < 0 && strip.scrollLeft <= 0) || (delta > 0 && strip.scrollLeft >= max - 1)) return;
+      }
+
       e.preventDefault();
       strip.scrollLeft += delta;
+      wrapIfNeeded();
     }, { passive: false });
 
     /* Click and drag to pan */
@@ -172,6 +253,13 @@
       moved = Math.max(moved, Math.abs(dx));
       if (moved > 4) strip.setPointerCapture(e.pointerId);
       strip.scrollLeft = startLeft - dx;
+      if (looping && setWidth > 0) {
+        /* a wrap mid-drag shifts scrollLeft; move the anchor by the same
+           amount so the photos stay glued to the cursor */
+        const before = strip.scrollLeft;
+        wrapIfNeeded();
+        startLeft += strip.scrollLeft - before;
+      }
     });
     const endDrag = () => { down = false; strip.classList.remove('is-dragging'); };
     strip.addEventListener('pointerup', endDrag);

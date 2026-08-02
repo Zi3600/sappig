@@ -20,7 +20,7 @@ export const homePage = defineType({
       title: 'Fotostrip',
       type: 'array',
       description:
-        'De foto\'s die je op de homepagina opzij kan scrollen. Sleep om te herschikken, het prullenbakje verwijdert. Laat leeg om de standaardfoto\'s van de site te tonen.',
+        'Vijf foto\'s die op de homepagina eindeloos ronddraaien. Sleep om te herschikken, het prullenbakje verwijdert. Lege plekken tonen een placeholder tot je er een foto in zet.',
       of: [
         defineArrayMember({
           type: 'image',
@@ -29,6 +29,7 @@ export const homePage = defineType({
           preview: {select: {media: 'asset', title: 'alt'}},
         }),
       ],
+      validation: (rule) => rule.max(5).warning('De strip is gemaakt voor 5 foto\'s'),
     }),
     defineField({
       name: 'panorama',

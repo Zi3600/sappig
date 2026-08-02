@@ -6,6 +6,9 @@ import {internationalizedArray} from 'sanity-plugin-internationalized-array'
 import {schemaTypes} from './schemaTypes'
 import {structure} from './structure'
 
+/* One fixed document each, reached from Structure — never from "New document". */
+const SINGLETONS = ['siteSettings', 'homePage', 'openingHours']
+
 export default defineConfig({
   name: 'default',
   title: 'SAPPIG.',
@@ -34,13 +37,12 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
     /* Singletons are created from Structure, never from "New document". */
-    templates: (prev) =>
-      prev.filter((t) => t.schemaType !== 'siteSettings' && t.schemaType !== 'homePage'),
+    templates: (prev) => prev.filter((t) => !SINGLETONS.includes(t.schemaType)),
   },
 
   document: {
     actions: (prev, {schemaType}) =>
-      schemaType === 'siteSettings' || schemaType === 'homePage'
+      SINGLETONS.includes(schemaType)
         ? prev.filter(({action}) => action !== 'duplicate' && action !== 'delete' && action !== 'unpublish')
         : prev,
   },

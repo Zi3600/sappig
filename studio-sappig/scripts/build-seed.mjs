@@ -198,6 +198,34 @@ const docs = categories.map((cat) => ({
 }))
 
 docs.push({
+  _id: 'openingHours',
+  _type: 'openingHours',
+  rows: [
+    {_key: key(), label: str('wo – vr', 'Wed – Fri', 'mer – ven'), times: '12:00 – 18:00', highlight: 'none'},
+    {_key: key(), label: str('zaterdag', 'Saturday', 'samedi'), times: '11:00 – 18:00', highlight: 'none'},
+    {
+      _key: key(),
+      label: str('Koopzondag', 'Shopping Sunday', 'Dimanche ouvert'),
+      note: str('1e zondag van de maand', '1st Sunday of the month', '1er dimanche du mois'),
+      times: '12:00 – 17:00',
+      highlight: 'sun',
+    },
+    {
+      _key: key(),
+      label: str('Afterwork', 'Afterwork', 'Afterwork'),
+      note: str('2e vrijdag van de maand', '2nd Friday of the month', '2e vendredi du mois'),
+      times: '18:00 – 21:00',
+      highlight: 'rose',
+    },
+  ],
+  closedNote: txt(
+    'Gesloten op zondag (behalve koopzondag), maandag en dinsdag.',
+    'Closed on Sunday (except shopping Sunday), Monday and Tuesday.',
+    'Fermé le dimanche (sauf dimanche ouvert), le lundi et le mardi.',
+  ),
+})
+
+docs.push({
   _id: 'siteSettings',
   _type: 'siteSettings',
   menuNote: str(

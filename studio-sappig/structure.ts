@@ -3,6 +3,7 @@ import type {StructureResolver} from 'sanity/structure'
 import {UlistIcon} from '@sanity/icons/Ulist'
 import {ImagesIcon} from '@sanity/icons/Images'
 import {BellIcon} from '@sanity/icons/Bell'
+import {ClockIcon} from '@sanity/icons/Clock'
 import {CogIcon} from '@sanity/icons/Cog'
 
 /* homePage and siteSettings are singletons: one fixed document each, so they
@@ -19,6 +20,10 @@ export const structure: StructureResolver = (S) =>
             .title('Menucategorieën')
             .defaultOrdering([{field: 'order', direction: 'asc'}]),
         ),
+      S.listItem()
+        .title('Openingsuren')
+        .icon(ClockIcon)
+        .child(S.document().schemaType('openingHours').documentId('openingHours')),
       S.listItem()
         .title("Foto's homepagina")
         .icon(ImagesIcon)

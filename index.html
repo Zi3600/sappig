@@ -137,13 +137,14 @@
     </div>
     <div class="wrap igrow reveal" data-delay="2" data-strip>
       <button class="ig-nav ig-nav--prev" data-strip-prev data-i18n-aria="ig.prev" aria-label="Vorige foto">‹</button>
-      <div class="ig-strip">
-        <figure class="ig-card"><img src="images/smoothies-lemons.jpg" alt="Drie kleurrijke smoothies voor de bloemenmuur bij SAPPIG." loading="lazy" /></figure>
-        <figure class="ig-card"><img src="images/neon-juice-latte.jpg" alt="Vers sapje en iced latte onder het neonbord 'Gij zijt een SAPPIG ding'." loading="lazy" /></figure>
-        <figure class="ig-card"><img src="images/smoothies-flower-wall.jpg" alt="Twee smoothies in ananasglazen voor de bloemenmuur." loading="lazy" /></figure>
-        <figure class="ig-card"><img src="images/smoothie-banana-bread.jpg" alt="Rode smoothie met een stuk vegan bananenbrood." loading="lazy" /></figure>
-        <figure class="ig-card"><img src="images/lounge-flower-wall.jpg" alt="Het zithoekje met bloemenmuur bij SAPPIG in Hasselt." loading="lazy" /></figure>
-        <figure class="ig-card ig-card--wide"><img src="images/interior-panorama.jpg" alt="Panorama van het interieur van SAPPIG met de bloemenbar." loading="lazy" /></figure>
+      <!-- Five slots. Each one is replaced by whatever the owner uploads under
+           "Foto's homepagina" in Sanity; unfilled slots keep the placeholder. -->
+      <div class="ig-strip" data-loop>
+        <figure class="ig-card ig-card--empty"><img src="images/placeholder.svg" alt="" loading="lazy" /></figure>
+        <figure class="ig-card ig-card--empty"><img src="images/placeholder.svg" alt="" loading="lazy" /></figure>
+        <figure class="ig-card ig-card--empty"><img src="images/placeholder.svg" alt="" loading="lazy" /></figure>
+        <figure class="ig-card ig-card--empty"><img src="images/placeholder.svg" alt="" loading="lazy" /></figure>
+        <figure class="ig-card ig-card--empty"><img src="images/placeholder.svg" alt="" loading="lazy" /></figure>
       </div>
       <button class="ig-nav ig-nav--next" data-strip-next data-i18n-aria="ig.next" aria-label="Volgende foto">›</button>
     </div>
@@ -198,7 +199,7 @@
           <p class="split__num" data-i18n="hrs.num">Openingsuren</p>
           <h2 data-i18n="hrs.h2">Kom eens langs</h2>
           <div class="divider divider--left"></div>
-          <div class="hours">
+          <div class="hours" data-cms="hours">
             <div class="hours__row">
               <span class="hours__day" data-i18n="hrs.weekdays">wo – vr</span>
               <span class="hours__dots"></span>
@@ -226,7 +227,7 @@
               <span class="hours__time">18:00 – 21:00</span>
             </div>
           </div>
-          <p class="hours__closed" data-i18n="hrs.closed">Gesloten op zondag (behalve koopzondag), maandag en dinsdag.</p>
+          <p class="hours__closed" data-i18n="hrs.closed" data-cms="hoursClosed">Gesloten op zondag (behalve koopzondag), maandag en dinsdag.</p>
           <a href="#visit" class="btn" data-i18n="hrs.cta">Plan je bezoek</a>
         </div>
       </div>
@@ -251,7 +252,7 @@
         <div class="locate__row">
           <span class="ic">◷</span>
           <span><strong data-i18n="visit.hoursLabel">Openingsuren</strong>
-            <span data-i18n-html="visit.hoursSummary">wo – vr · 12:00 – 18:00<br>za · 11:00 – 18:00<br>Koopzondag (1e van de maand) · 12:00 – 17:00<br>Afterwork (2e vrijdag) · 18:00 – 21:00</span>
+            <span data-i18n-html="visit.hoursSummary" data-cms="hoursSummary">wo – vr · 12:00 – 18:00<br>za · 11:00 – 18:00<br>Koopzondag (1e van de maand) · 12:00 – 17:00<br>Afterwork (2e vrijdag) · 18:00 – 21:00</span>
           </span>
         </div>
         <div class="locate__row">

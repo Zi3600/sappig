@@ -38,8 +38,14 @@
       "panorama": panorama{ "url": asset->url, alt, hotspot },
       "hoursImage": hoursImage{ "url": asset->url, hotspot }
     },
+    "hours": *[_id == "openingHours"][0]{
+      "rows": rows[]{ _key, label, note, times, highlight },
+      closedNote
+    },
     "settings": *[_id == "siteSettings"][0]{ menuNote, languageNotice, instagramUrl }
   }`;
+
+  const GALLERY_SLOTS = 5;
 
   /* ---------------- helpers ---------------- */
 
@@ -172,23 +178,23 @@
   function renderHome(home) {
     if (!home) return;
 
-    /* photo strip — only swapped when the owner has actually uploaded some,
-       otherwise the shipped photos stay */
+    /* Photo strip: always five slots. Uploaded photos fill them in order,
+       the rest keep the placeholder so the gaps are obvious in the Studio. */
     const strip = document.querySelector('.ig-strip');
-    if (strip && home.gallery && home.gallery.length) {
-      const frag = document.createDocumentFragment();
-      home.gallery.forEach((img, i) => {
-        if (!img || !img.url) return;
-        const wide = i > 0 && i === home.gallery.length - 1;   // last one runs wide
-        const fig = el('figure', wide ? 'ig-card ig-card--wide' : 'ig-card');
-        const photo = el('img');
-        photo.src = wide ? imageUrl(img, 1120, 700) : imageUrl(img, 680, 850);
-        photo.alt = img.alt || '';
-        photo.loading = 'lazy';
-        fig.appendChild(photo);
-        frag.appendChild(fig);
-      });
-      if (frag.childNodes.length) {
+    if (strip) {
+      const photos = (home.gallery || []).filter((img) => img && img.url);
+      if (photos.length) {
+        const frag = document.createDocumentFragment();
+        for (let i = 0; i < GALLERY_SLOTS; i++) {
+          const img = photos[i];
+          const fig = el('figure', img ? 'ig-card' : 'ig-card ig-card--empty');
+          const photo = el('img');
+          photo.src = img ? imageUrl(img, 680, 850) : 'images/placeholder.svg';
+          photo.alt = img ? img.alt || '' : '';
+          photo.loading = 'lazy';
+          fig.appendChild(photo);
+          frag.appendChild(fig);
+        }
         strip.textContent = '';
         strip.appendChild(frag);
         strip.dispatchEvent(new CustomEvent('sappig:stripchanged', { bubbles: true }));
@@ -204,6 +210,63 @@
     const hoursBg = document.querySelector('.hours-band__bg');
     if (hoursBg && home.hoursImage && home.hoursImage.url) {
       hoursBg.src = imageUrl(home.hoursImage, 1920, 1000);
+    }
+  }
+
+  /* ---------------- opening hours ---------------- */
+
+  function renderHours(hours) {
+    if (!hours || !hours.rows || !hours.rows.length) return;
+    const rows = hours.rows;
+
+    /* the table on the homepage */
+    const table = document.querySelector('[data-cms="hours"]');
+    if (table) {
+      const frag = document.createDocumentFragment();
+      rows.forEach((row) => {
+        const label = loc(row.label);
+        if (!label) return;
+        const line = el('div', 'hours__row');
+
+        const day = el('span', 'hours__day');
+        if (row.highlight && row.highlight !== 'none') {
+          day.appendChild(el('span', `chip chip--${row.highlight === 'rose' ? 'rose' : 'sun'}`, label));
+        } else {
+          day.appendChild(document.createTextNode(label));
+        }
+        const note = loc(row.note);
+        if (note) day.appendChild(el('small', 'hours__sub', note));
+        line.appendChild(day);
+
+        line.appendChild(el('span', 'hours__dots'));
+        line.appendChild(el('span', 'hours__time', row.times || '—'));
+        frag.appendChild(line);
+      });
+      if (frag.childNodes.length) {
+        table.textContent = '';
+        table.appendChild(frag);
+      }
+    }
+
+    const closed = loc(hours.closedNote);
+    const closedEl = document.querySelector('[data-cms="hoursClosed"]');
+    if (closedEl) closedEl.textContent = closed;   /* blank note removes the line */
+
+    /* the compact summary in the "Vind ons" block, from the same rows */
+    const summary = document.querySelector('[data-cms="hoursSummary"]');
+    if (summary) {
+      summary.textContent = '';
+      rows.forEach((row, i) => {
+        const label = loc(row.label);
+        if (!label) return;
+        if (i > 0) summary.appendChild(el('br'));
+        const note = loc(row.note);
+        summary.appendChild(
+          document.createTextNode(
+            `${label}${note ? ` (${note})` : ''} · ${row.times || '—'}`,
+          ),
+        );
+      });
     }
   }
 
@@ -369,6 +432,7 @@
       cache = result;
       renderMenu(result.categories);
       renderHome(result.home);
+      renderHours(result.hours);
       renderSettings(result.settings);
       schedulePopup(result.popups);
     })
@@ -377,10 +441,12 @@
       console.warn('[sappig] falling back to built-in content:', err.message);
     });
 
-  /* Re-render CMS content when the visitor switches language. */
+  /* Re-render CMS content when the visitor switches language. i18n.js applies
+     its own translations first and fires this, so CMS values win where set. */
   document.addEventListener('sappig:lang', () => {
     if (!cache) return;
     renderMenu(cache.categories);
+    renderHours(cache.hours);
     renderSettings(cache.settings);
   });
 })();
