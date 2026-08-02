@@ -39,7 +39,7 @@
       "hoursImage": hoursImage{ "url": asset->url, hotspot }
     },
     "hours": *[_id == "openingHours"][0]{
-      "rows": rows[]{ _key, label, note, times, highlight },
+      "rows": rows[]{ _key, label, note, times, days, highlight },
       closedNote
     },
     "settings": *[_id == "siteSettings"][0]{ menuNote, languageNotice, instagramUrl }
@@ -270,6 +270,40 @@
     }
   }
 
+  /* Keep the structured data Google reads in step with the CMS.
+
+     Only rows tagged with weekdays make it in. schema.org has no way to say
+     "1st Sunday of the month", so koopzondag and afterwork are deliberately
+     left out rather than described inaccurately — claiming we open every
+     Sunday would be worse than staying quiet about it. */
+  function renderStructuredData(hours) {
+    if (!hours || !hours.rows) return;
+    const script = document.querySelector('script[type="application/ld+json"]');
+    if (!script) return;
+
+    const spec = [];
+    hours.rows.forEach((row) => {
+      if (!row.days || !row.days.length || !row.times) return;
+      const m = String(row.times).match(/(\d{1,2})[:.](\d{2})\s*[–—-]\s*(\d{1,2})[:.](\d{2})/);
+      if (!m) return;
+      spec.push({
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: row.days.length === 1 ? row.days[0] : row.days,
+        opens: `${m[1].padStart(2, '0')}:${m[2]}`,
+        closes: `${m[3].padStart(2, '0')}:${m[4]}`,
+      });
+    });
+    if (!spec.length) return;   // nothing usable: leave the shipped markup alone
+
+    try {
+      const data = JSON.parse(script.textContent);
+      data.openingHoursSpecification = spec;
+      script.textContent = JSON.stringify(data, null, 2);
+    } catch (e) {
+      /* malformed markup on the page — better to leave it than replace it */
+    }
+  }
+
   function renderSettings(settings) {
     if (!settings) return;
     const note = loc(settings.menuNote);
@@ -433,6 +467,7 @@
       renderMenu(result.categories);
       renderHome(result.home);
       renderHours(result.hours);
+      renderStructuredData(result.hours);
       renderSettings(result.settings);
       schedulePopup(result.popups);
     })

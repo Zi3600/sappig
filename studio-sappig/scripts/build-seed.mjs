@@ -201,8 +201,20 @@ docs.push({
   _id: 'openingHours',
   _type: 'openingHours',
   rows: [
-    {_key: key(), label: str('wo – vr', 'Wed – Fri', 'mer – ven'), times: '12:00 – 18:00', highlight: 'none'},
-    {_key: key(), label: str('zaterdag', 'Saturday', 'samedi'), times: '11:00 – 18:00', highlight: 'none'},
+    {
+      _key: key(),
+      label: str('wo – vr', 'Wed – Fri', 'mer – ven'),
+      times: '12:00 – 18:00',
+      days: ['Wednesday', 'Thursday', 'Friday'],
+      highlight: 'none',
+    },
+    {
+      _key: key(),
+      label: str('zaterdag', 'Saturday', 'samedi'),
+      times: '11:00 – 18:00',
+      days: ['Saturday'],
+      highlight: 'none',
+    },
     {
       _key: key(),
       label: str('Koopzondag', 'Shopping Sunday', 'Dimanche ouvert'),

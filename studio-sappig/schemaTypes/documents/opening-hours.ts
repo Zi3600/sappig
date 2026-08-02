@@ -30,6 +30,26 @@ const hoursRow = defineArrayMember({
       description: 'Bv. "12:00 – 18:00". Laat leeg en vul hieronder "Gesloten" aan als je dicht bent.',
     }),
     defineField({
+      name: 'days',
+      title: 'Welke dagen? (voor Google)',
+      type: 'array',
+      description:
+        'Alleen voor Google en Google Maps — dit verandert niets aan de site. Vink de dagen aan die deze rij dekt. Laat leeg bij onregelmatige rijen zoals "1e zondag van de maand": die kan Google toch niet verwerken.',
+      of: [defineArrayMember({type: 'string'})],
+      options: {
+        list: [
+          {title: 'Maandag', value: 'Monday'},
+          {title: 'Dinsdag', value: 'Tuesday'},
+          {title: 'Woensdag', value: 'Wednesday'},
+          {title: 'Donderdag', value: 'Thursday'},
+          {title: 'Vrijdag', value: 'Friday'},
+          {title: 'Zaterdag', value: 'Saturday'},
+          {title: 'Zondag', value: 'Sunday'},
+        ],
+        layout: 'grid',
+      },
+    }),
+    defineField({
       name: 'highlight',
       title: 'Opvallend maken',
       type: 'string',
