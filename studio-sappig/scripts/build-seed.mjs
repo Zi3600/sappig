@@ -7,7 +7,12 @@
 
    Explicit _id values are used here (against the usual "let Sanity generate
    IDs" rule) purely so a re-import updates the same documents instead of
-   duplicating the whole menu. */
+   duplicating the whole menu.
+
+   They must not contain a dot. Sanity reads any `a.b` id as path-prefixed —
+   the same mechanism that hides `drafts.*` — and such documents are invisible
+   to unauthenticated readers. Since the site queries anonymously from the
+   browser, a dotted id silently yields an empty menu. Hence the hyphen. */
 
 import {writeFileSync} from 'node:fs'
 import {fileURLToPath} from 'node:url'
@@ -180,7 +185,7 @@ const categories = [
 ]
 
 const docs = categories.map((cat) => ({
-  _id: `menuCategory.${cat.id}`,
+  _id: `menuCategory-${cat.id}`,
   _type: 'menuCategory',
   title: cat.title,
   ...(cat.subtitle ? {subtitle: cat.subtitle} : {}),

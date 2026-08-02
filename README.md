@@ -92,7 +92,7 @@ in Sanity toegelaten zijn:
 ```bash
 cd studio-sappig
 npx sanity cors add https://zi3600.github.io
-
+npx sanity cors add http://localhost:4173
 ```
 
 Zonder dit valt de site terug op het menu dat vast in `menu.html` staat — de

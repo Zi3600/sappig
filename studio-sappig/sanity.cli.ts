@@ -7,5 +7,6 @@ export default defineCliConfig({
   },
   /* The site is plain HTML served from GitHub Pages, so there is no
      framework build to hook into here. */
-  deployment: {autoUpdates: true},
+  studioHost: 'sappig',
+  deployment: {autoUpdates: true, appId: 'qcdniydf1wo9iw368l0oglmp'},
 })
