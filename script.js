@@ -162,6 +162,13 @@
       originals.slice().reverse().forEach((n) => strip.insertBefore(clone(n), strip.firstChild));
 
       measure();
+      /* A set narrower than the viewport can't fill the wrap window, and the
+         seam maths stops holding — drop the clones and stay a finite strip. */
+      if (setWidth <= strip.clientWidth) {
+        strip.querySelectorAll('[data-clone]').forEach((n) => n.remove());
+        setWidth = 0;
+        return;
+      }
       jumpTo(setWidth);
     }
 

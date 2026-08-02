@@ -188,6 +188,10 @@ body.menu-open .nav__toggle span:nth-child(3) { transform: translateY(-8.2px) ro
   scroll-snap-type: x mandatory; scrollbar-width: none;
 }
 .ig-strip::-webkit-scrollbar { display: none; }
+/* The looping strip repositions itself at the seam. Mandatory snapping fights
+   those jumps and makes an endless strip feel stepped rather than continuous,
+   so the loop opts out. */
+.ig-strip[data-loop] { scroll-snap-type: none; }
 .ig-card {
   flex: 0 0 min(78vw, 340px); aspect-ratio: 4 / 5;
   scroll-snap-align: center; border-radius: var(--radius); overflow: hidden;
