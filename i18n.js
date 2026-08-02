@@ -153,14 +153,9 @@
     'mcta.h2':  { en: 'Craving it yet?', fr: 'L’eau à la bouche ?' },
     'mcta.btn': { en: 'Find us in Hasselt', fr: 'Trouvez-nous à Hasselt' },
 
-    /* ---- legal page ---- */
-    'legalp.h1':   { en: 'Legal information', fr: 'Mentions légales' },
-    'legalp.lead': { en: 'Company details and legal documents of SAPPIG.', fr: 'Coordonnées et documents juridiques de SAPPIG.' },
-    'lg.biz':      { en: 'Company details', fr: 'Coordonnées de l’entreprise' },
-    'lg.privacy':  { en: 'Privacy policy', fr: 'Politique de confidentialité' },
-    'lg.cookies':  { en: 'Cookie policy', fr: 'Politique de cookies' },
-    'lg.terms':    { en: 'Terms and conditions', fr: 'Conditions générales' },
-    'lg.todo':     { en: 'Text to follow — will be added later.', fr: 'Texte à venir — sera complété plus tard.' }
+    /* ---- legal page (body copy stays in Dutch — legal text is not translated) ---- */
+    'legalp.h1':   { en: 'SAPPIG privacy policy', fr: 'Politique de confidentialité de SAPPIG' },
+    'legalp.lead': { en: 'Version: August 2, 2026', fr: 'Version : 2 août 2026' }
   };
 
   /* -------- snapshot inline NL from the DOM as the nl dictionary -------- */

@@ -374,19 +374,16 @@ body.menu-open .nav__toggle span:nth-child(3) { transform: translateY(-8.2px) ro
 
 /* ---------------- Legal page ---------------- */
 .legal { max-width: 46rem; margin-inline: auto; }
-.legal h2 { font-size: clamp(2.3rem, 5vw, 3.2rem); margin-top: clamp(2.4rem, 6vw, 3.6rem); }
+.legal h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); margin-top: clamp(2.2rem, 5vw, 3rem); }
 .legal h2:first-child { margin-top: 0; }
-.biz {
-  background: var(--paper); border-radius: var(--radius); box-shadow: var(--shadow);
-  padding: clamp(1.4rem, 3vw, 2.2rem); margin-top: 1.4rem;
-}
-.biz dl { display: grid; grid-template-columns: auto 1fr; gap: .55rem 1.6rem; margin: 0; }
-.biz dt { font-weight: 800; }
-.biz dd { margin: 0; color: var(--ink-soft); }
-.placeholder {
-  border: 2px dashed rgba(166, 43, 93, .35); border-radius: var(--radius);
-  padding: 1.2rem 1.4rem; margin-top: 1.2rem; color: var(--ink-soft); font-style: italic;
-  background: rgba(255, 252, 246, .6);
+.legal p { margin: .9rem 0 0; }
+.legal a { color: var(--berry-deep); text-decoration: underline; text-underline-offset: .16em; }
+.legal ol { margin: .9rem 0 0; padding-left: 1.4rem; }
+.legal ol li { margin-bottom: .7rem; }
+.legal ol li:last-child { margin-bottom: 0; }
+.legal__close {
+  margin-top: clamp(2.2rem, 5vw, 3rem); padding-top: 1.4rem;
+  border-top: 2px solid var(--cream-2); color: var(--ink-soft);
 }
 
 /* ---------------- Footer ---------------- */
@@ -421,8 +418,6 @@ body.menu-open .nav__toggle span:nth-child(3) { transform: translateY(-8.2px) ro
   .locate { grid-template-columns: 1fr; }
   .footer__top { grid-template-columns: 1fr; }
   .reviews { min-height: 19rem; }
-  .biz dl { grid-template-columns: 1fr; gap: .1rem; }
-  .biz dt { margin-top: .6rem; }
   .ig-nav { display: none; }
   /* photo runs full-bleed behind the card, so the scrim goes vertical */
   .hours-band__grid { grid-template-columns: 1fr; }
