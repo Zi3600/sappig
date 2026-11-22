@@ -28,7 +28,12 @@ const intl = (kind) => (nl, en, fr) =>
     ['fr', fr],
   ]
     .filter(([, value]) => value)
-    .map(([_key, value]) => ({_key, _type: `internationalizedArray${kind}Value`, value}))
+    .map(([language, value]) => ({
+      _key: key(),
+      _type: `internationalizedArray${kind}Value`,
+      language,
+      value,
+    }))
 
 const str = intl('String')
 const txt = intl('Text')

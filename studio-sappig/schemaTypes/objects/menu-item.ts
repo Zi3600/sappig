@@ -3,8 +3,8 @@ import {defineType, defineField, defineArrayMember} from 'sanity'
 /** Pull the Dutch value out of an internationalized array for Studio previews. */
 export function nlValue(field: unknown): string {
   if (!Array.isArray(field)) return ''
-  const entries = field as Array<{_key?: string; value?: string}>
-  const nl = entries.find((e) => e._key === 'nl')
+  const entries = field as Array<{_key?: string; language?: string; value?: string}>
+  const nl = entries.find((e) => (e.language ?? e._key) === 'nl')
   return (nl?.value || entries.find((e) => e.value)?.value || '').trim()
 }
 

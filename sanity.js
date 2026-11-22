@@ -54,8 +54,8 @@
     if (!Array.isArray(field)) return '';
     const lang = I18N ? I18N.lang : 'nl';
     const match =
-      field.find((e) => e && e._key === lang && e.value) ||
-      field.find((e) => e && e._key === 'nl' && e.value) ||
+      field.find((e) => e && (e.language === lang || e._key === lang) && e.value) ||
+      field.find((e) => e && (e.language === 'nl' || e._key === 'nl') && e.value) ||
       field.find((e) => e && e.value);
     return match ? String(match.value) : '';
   }
