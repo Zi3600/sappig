@@ -209,13 +209,18 @@ docs.push({
     {
       _key: key(),
       label: str('wo – vr', 'Wed – Fri', 'mer – ven'),
-      times: '12:00 – 18:00',
+      times: '11:00 – 17:00',
       days: ['Wednesday', 'Thursday', 'Friday'],
       highlight: 'none',
     },
     {
       _key: key(),
       label: str('zaterdag', 'Saturday', 'samedi'),
+      note: str(
+        'Avondeten mogelijk tot 21:00, afhankelijk van de drukte',
+        'Dinner possible until 21:00, depending on how busy it is',
+        'Dîner possible jusqu’à 21h00, selon l’affluence',
+      ),
       times: '11:00 – 18:00',
       days: ['Saturday'],
       highlight: 'none',
@@ -223,22 +228,15 @@ docs.push({
     {
       _key: key(),
       label: str('Koopzondag', 'Shopping Sunday', 'Dimanche ouvert'),
-      note: str('1e zondag van de maand', '1st Sunday of the month', '1er dimanche du mois'),
-      times: '12:00 – 17:00',
+      note: str('bij goed weer', 'weather permitting', 'si le temps le permet'),
+      times: '13:00 – 18:00',
       highlight: 'sun',
-    },
-    {
-      _key: key(),
-      label: str('Afterwork', 'Afterwork', 'Afterwork'),
-      note: str('2e vrijdag van de maand', '2nd Friday of the month', '2e vendredi du mois'),
-      times: '18:00 – 21:00',
-      highlight: 'rose',
     },
   ],
   closedNote: txt(
-    'Gesloten op zondag (behalve koopzondag), maandag en dinsdag.',
-    'Closed on Sunday (except shopping Sunday), Monday and Tuesday.',
-    'Fermé le dimanche (sauf dimanche ouvert), le lundi et le mardi.',
+    'Gesloten op zondag (behalve koopzondag bij goed weer), maandag en dinsdag. Check altijd op Google.',
+    'Closed on Sunday (except shopping Sunday, weather permitting), Monday and Tuesday. Always check Google.',
+    'Fermé le dimanche (sauf dimanche ouvert, si le temps le permet), le lundi et le mardi. Vérifiez toujours sur Google.',
   ),
 })
 

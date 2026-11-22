@@ -51,10 +51,9 @@
     'hrs.weekdays': { en: 'Wed – Fri', fr: 'mer – ven' },
     'hrs.saturday': { en: 'Saturday', fr: 'samedi' },
     'hrs.koop':     { en: 'Shopping Sunday', fr: 'Dimanche ouvert' },
-    'hrs.koopSub':  { en: '1st Sunday of the month', fr: '1er dimanche du mois' },
-    'hrs.after':    { en: 'Afterwork', fr: 'Afterwork' },
-    'hrs.afterSub': { en: '2nd Friday of the month', fr: '2e vendredi du mois' },
-    'hrs.closed':   { en: 'Closed on Sunday (except shopping Sunday), Monday and Tuesday.', fr: 'Fermé le dimanche (sauf dimanche ouvert), le lundi et le mardi.' },
+    'hrs.satSub':   { en: 'Dinner possible until 21:00, depending on how busy it is', fr: 'Dîner possible jusqu’à 21h00, selon l’affluence' },
+    'hrs.koopSub':  { en: 'weather permitting', fr: 'si le temps le permet' },
+    'hrs.closed':   { en: 'Closed on Sunday (except shopping Sunday, weather permitting), Monday and Tuesday. Always check Google.', fr: 'Fermé le dimanche (sauf dimanche ouvert, si le temps le permet), le lundi et le mardi. Vérifiez toujours sur Google.' },
     'hrs.cta':      { en: 'Plan your visit', fr: 'Préparez votre visite' },
 
     /* ---- visit / locate ---- */
@@ -62,8 +61,8 @@
     'visit.h2':         { en: 'Find us in the heart of Hasselt', fr: 'Trouvez-nous au cœur de Hasselt' },
     'visit.hoursLabel': { en: 'Opening hours', fr: 'Horaires' },
     'visit.hoursSummary': {
-      en: 'Wed – Fri · 12:00 – 18:00<br>Sat · 11:00 – 18:00<br>Shopping Sunday (1st of the month) · 12:00 – 17:00<br>Afterwork (2nd Friday) · 18:00 – 21:00',
-      fr: 'mer – ven · 12:00 – 18:00<br>sam · 11:00 – 18:00<br>Dimanche ouvert (1er du mois) · 12:00 – 17:00<br>Afterwork (2e vendredi) · 18:00 – 21:00'
+      en: 'Wed – Fri · 11:00 – 17:00<br>Sat · 11:00 – 18:00 (dinner possible until 21:00)<br>Shopping Sunday (weather permitting) · 13:00 – 18:00',
+      fr: 'mer – ven · 11:00 – 17:00<br>sam · 11:00 – 18:00 (dîner possible jusqu’à 21:00)<br>Dimanche ouvert (si le temps le permet) · 13:00 – 18:00'
     },
     'visit.followLabel': { en: 'Follow us', fr: 'Suivez-nous' },
     'visit.directions':  { en: 'Directions', fr: 'Itinéraire' },

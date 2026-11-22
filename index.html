@@ -34,7 +34,7 @@
       "https://www.facebook.com/sappig.juicetruck/"
     ],
     "openingHoursSpecification": [
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday", "Friday"], "opens": "12:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday", "Friday"], "opens": "11:00", "closes": "17:00" },
       { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "11:00", "closes": "18:00" }
     ]
   }
@@ -203,31 +203,26 @@
             <div class="hours__row">
               <span class="hours__day" data-i18n="hrs.weekdays">wo – vr</span>
               <span class="hours__dots"></span>
-              <span class="hours__time">12:00 – 18:00</span>
+              <span class="hours__time">11:00 – 17:00</span>
             </div>
             <div class="hours__row">
-              <span class="hours__day" data-i18n="hrs.saturday">zaterdag</span>
+              <span class="hours__day">
+                <span data-i18n="hrs.saturday">zaterdag</span>
+                <small class="hours__sub" data-i18n="hrs.satSub">Avondeten mogelijk tot 21:00, afhankelijk van de drukte</small>
+              </span>
               <span class="hours__dots"></span>
               <span class="hours__time">11:00 – 18:00</span>
             </div>
             <div class="hours__row">
               <span class="hours__day">
                 <span class="chip chip--sun" data-i18n="hrs.koop">Koopzondag</span>
-                <small class="hours__sub" data-i18n="hrs.koopSub">1e zondag van de maand</small>
+                <small class="hours__sub" data-i18n="hrs.koopSub">bij goed weer</small>
               </span>
               <span class="hours__dots"></span>
-              <span class="hours__time">12:00 – 17:00</span>
-            </div>
-            <div class="hours__row">
-              <span class="hours__day">
-                <span class="chip chip--rose" data-i18n="hrs.after">Afterwork</span>
-                <small class="hours__sub" data-i18n="hrs.afterSub">2e vrijdag van de maand</small>
-              </span>
-              <span class="hours__dots"></span>
-              <span class="hours__time">18:00 – 21:00</span>
+              <span class="hours__time">13:00 – 18:00</span>
             </div>
           </div>
-          <p class="hours__closed" data-i18n="hrs.closed" data-cms="hoursClosed">Gesloten op zondag (behalve koopzondag), maandag en dinsdag.</p>
+          <p class="hours__closed" data-i18n="hrs.closed" data-cms="hoursClosed">Gesloten op zondag (behalve koopzondag bij goed weer), maandag en dinsdag. Check altijd op Google.</p>
           <a href="#visit" class="btn" data-i18n="hrs.cta">Plan je bezoek</a>
         </div>
       </div>
@@ -252,7 +247,7 @@
         <div class="locate__row">
           <span class="ic">◷</span>
           <span><strong data-i18n="visit.hoursLabel">Openingsuren</strong>
-            <span data-i18n-html="visit.hoursSummary" data-cms="hoursSummary">wo – vr · 12:00 – 18:00<br>za · 11:00 – 18:00<br>Koopzondag (1e van de maand) · 12:00 – 17:00<br>Afterwork (2e vrijdag) · 18:00 – 21:00</span>
+            <span data-i18n-html="visit.hoursSummary" data-cms="hoursSummary">wo – vr · 11:00 – 17:00<br>za · 11:00 – 18:00 (avondeten mogelijk tot 21:00)<br>Koopzondag (bij goed weer) · 13:00 – 18:00</span>
           </span>
         </div>
         <div class="locate__row">
